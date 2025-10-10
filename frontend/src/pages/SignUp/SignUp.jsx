@@ -2,11 +2,12 @@ import { Link } from "react-router-dom"
 import Button from "../../components/Button/Button"
 import Input from "../../components/Input/Input"
 import { useState } from "react"
+import { registerUser } from "../../api/api"
 
 const SignUp = () => {
     const [error, setError] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setError("")
         if (e.target.password.value != e.target.password2.value) {
@@ -17,6 +18,14 @@ const SignUp = () => {
             username: e.target.username.value,
             password: e.target.password.value,
             email: e.target.email.value,
+        }
+
+        try {
+            const data = await registerUser(user)
+            console.log(data)
+        } catch (err) {
+            console.error(err)
+            setError(err.message)
         }
     }
     return (
