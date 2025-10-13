@@ -1,3 +1,6 @@
+import { useState } from "react"
+import { useUserStore } from "../store/store"
+
 export const registerUser = async (user) => {
     try {
         const req = await fetch("https://kitek.ktkv.dev/feedback/api/auth/register", {
@@ -40,4 +43,33 @@ export const loginUser = async (user) => {
         console.error(err)
         throw new Error(err)
     }
+}
+
+export const fetchPosts = async () => {
+    try {
+        const res = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`)
+        const json = await res.json()
+        return json
+    } catch (err) {
+        console.error(err)
+    }
+
+}
+export const sendMesssage = async (message) => {
+    try {
+        const {jwt} = useUserStore()
+        const req = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`, 
+        {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + jwt
+        },
+    }
+)
+console.log(await req.json())
+    } catch (err) {
+    console.error(err)
+}
 }

@@ -4,7 +4,8 @@ export const useUserStore = create()(
     persist(
         (set, get) => ({
             jwt: undefined,
-            setJWT: (jwt) => set((state) => ({...state, jwt}))
+            setJWT: (jwt) => set((state) => ({...state, jwt})),
+            clearJWT: () => set((state) => ({...state, jwt: undefined})),
         }),
         {
             name: 'user', 
