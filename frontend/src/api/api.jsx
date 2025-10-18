@@ -57,19 +57,72 @@ export const fetchPosts = async () => {
 }
 export const sendMesssage = async (message) => {
     try {
-        const {jwt} = useUserStore()
-        const req = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`, 
-        {
-            method: "POST",
-            body: JSON.stringify(user),
-            headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + jwt
-        },
-    }
-)
-console.log(await req.json())
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`,
+            {
+                method: "POST",
+                body: JSON.stringify(message),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + jwt
+                },
+            }
+        )
+        console.log(await req.json())
     } catch (err) {
-    console.error(err)
+        console.error(err)
+    }
 }
+export const deleteMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + jwt,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const reportMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}/report`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + jwt,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const likeMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}/like`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + jwt,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
+    }
 }
