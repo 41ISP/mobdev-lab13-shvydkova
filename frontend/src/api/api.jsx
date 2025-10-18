@@ -64,7 +64,7 @@ export const sendMesssage = async (message) => {
                 body: JSON.stringify(message),
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + jwt
+                    "Authorization": "Bearer " + jwt.token
                 },
             }
         )
@@ -81,7 +81,7 @@ export const deleteMessage = async (id) => {
             {
                 method: "DELETE",
                 headers: {
-                    Authorization: "Bearer " + jwt,
+                    Authorization: "Bearer " + jwt.token,
                 },
             }
         )
@@ -99,7 +99,7 @@ export const reportMessage = async (id) => {
             {
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + jwt,
+                    Authorization: "Bearer " + jwt.token,
                 },
             }
         )
@@ -117,7 +117,7 @@ export const likeMessage = async (id) => {
             {
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + jwt,
+                    Authorization: "Bearer " + jwt.token,
                 },
             }
         )
